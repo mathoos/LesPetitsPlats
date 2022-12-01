@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/28a239a532.js" crossorigin="anonymous"></script>
+    <title>Les Petits Plats</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <img class="header_logo" src="assets/logo.png" alt="Logo Les Petits Plats">
+    </header>
+
+    <div class="search">
+        <input class="search_bar" type="search" placeholder="Rechercher une recette">
+        <i class="search_icon fa-solid fa-magnifying-glass"></i>
+    </div>
+
+
+    <div class="section-tag" id="tag"></div>
+
+
+    <section class="menu_recherche">
+
+        <div class="bouton">
+            <button class="btn ingredients">         
+                <input placeholder="Ingrédients">               
+                <i class="fas fa-chevron-down" data-type="ingredients"></i>
+            </button>
+            <div class="liste ingredients" data-type="ingredients" id="ingredients_div"></div>
+        </div>
+
+        <div class="bouton">
+            <button class="btn appareils">         
+                <input placeholder="Appareils">               
+                <i class="fas fa-chevron-down" data-type="appareils"></i>
+            </button>
+            <div class="liste appareils" data-type="appareils" id="appareils_div"></div>
+        </div>
+
+        <div class="bouton">
+            <button class="btn ustensiles">         
+                <input placeholder="Ustensiles">               
+                <i class="fas fa-chevron-down" data-type="ustensiles"></i>
+            </button>
+            <div class="liste ustensiles" data-type="ustensiles" id="ustensiles_div"></div>
+        </div>
+
+    </section>
+
+
+
+
+    <div class="recipes-container"></div>         
+        
+
+    <script src="data/recipes.js"></script>
+    <script type="module" src="script.js"></script>
+    
+</body>
+</html>

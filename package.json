@@ -1,0 +1,11 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/style.scss:./css/style.css ./sass/main.scss:./css/main.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
