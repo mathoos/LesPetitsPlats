@@ -46,7 +46,6 @@ body {
 .recipes-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 2.6vw;
   padding-top: 5vh;
 }
@@ -123,7 +122,17 @@ body {
   padding: 0.8vh 1.1vw;
   width: fit-content;
   border-radius: 5px;
-  border: 1px solid black;
+  color: white;
+  font-size: 18px;
+}
+.section-tag .tag.ingredients {
+  background-color: #3282F7;
+}
+.section-tag .tag.appareils {
+  background-color: #68D9A4;
+}
+.section-tag .tag.ustensiles {
+  background-color: #ED6454;
 }
 
 .menu_recherche {
@@ -142,6 +151,7 @@ body {
   min-width: 10vw;
   padding: 2.7vh 0.9vw;
   border-radius: 5px;
+  cursor: pointer;
 }
 .menu_recherche .bouton .btn.active {
   width: 34.7vw;
@@ -180,14 +190,14 @@ body {
   left: 0;
   display: none;
   flex-wrap: wrap;
-  row-gap: 2vw;
   width: 34.7vw;
-  padding: 2vh 0.9vw;
   border-radius: 0 0 5px 5px;
 }
 .menu_recherche .bouton .liste p {
   color: white;
+  padding: 2vh 1vw;
   width: 33.3333333333%;
+  cursor: pointer;
 }
 .menu_recherche .bouton .liste.active {
   display: flex;
