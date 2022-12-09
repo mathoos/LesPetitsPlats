@@ -191,7 +191,21 @@ body {
   display: none;
   flex-wrap: wrap;
   width: 34.7vw;
+  max-height: 50vh;
+  overflow-y: scroll;
   border-radius: 0 0 5px 5px;
+}
+.menu_recherche .bouton .liste::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+.menu_recherche .bouton .liste::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.351);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.9px);
+  -webkit-backdrop-filter: blur(6.9px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
 }
 .menu_recherche .bouton .liste p {
   color: white;
