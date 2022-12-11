@@ -100,8 +100,6 @@ function initLists(recipes) {
     tabUstensiles = [...new Set (tabUstensiles)];
     tabAppareils = [...new Set (tabAppareils)];
 
-
-
     createList(tabIngredients, listeIngredients)
     createList(tabAppareils, listeAppareils)
     createList(tabUstensiles, listeUstensiles)
@@ -117,111 +115,7 @@ function createList(tags, container){
 }
 
 
-const inputIngredients = document.querySelector(".input-ingredients");
-const inputAppareils = document.querySelector(".input-appareils");
-const inputUstensiles = document.querySelector(".input-ustensiles");
 
-//filtreBtn(inputIngredients)
-
-function filtreIngredients(){
-    inputIngredients.addEventListener("input", () => {
-        const inputBarre = inputIngredients.value;
-        if (inputBarre.length === 0) {
-            displayRecipes(recipes)
-        }
-        else{
-            recipesChosenArray = recipes
-
-            if(inputBarre.length >= 1){        
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>                
-                    recipe.ingredients.some(ingredient =>                      
-                        ingredient.ingredient.toLowerCase().includes(inputBarre.toLowerCase())                       
-                    )               
-                )   
-                console.log(recipesChosenArray)
-                initLists(recipesChosenArray)     
-                displayRecipes(recipesChosenArray)       
-            }   
-            if(inputBarre.length === 0){
-                displayRecipes(recipes)
-                initLists(recipes)
-                console.log("c'est 0")
-            }
-        
-            else if(recipesChosenArray.length == 0){  
-                noRecipes();
-            } 
-        }
-                  
-    })
-}
-
-function filtreAppareils(){
-    inputAppareils.addEventListener("input", () => {
-        const inputBarre = inputAppareils.value;
-
-        if (inputBarre.length === 0) {
-            displayRecipes(recipes)
-        }
-        else{
-            recipesChosenArray = recipes
-
-            if (inputBarre.length >= 1) {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.appliance.toLowerCase().includes(inputBarre.toLowerCase())
-                )
-                console.log(recipesChosenArray)
-                initLists(recipesChosenArray)     
-                displayRecipes(recipesChosenArray)
-            }
-            if(inputBarre.length === 0){
-                displayRecipes(recipes)
-                initLists(recipes)
-                console.log("c'est 0")
-            }
-        
-            else if(recipesChosenArray.length == 0){  
-                noRecipes();
-            }  
-        }      
-    })
-}
-
-function filtreUstensiles(){
-    inputUstensiles.addEventListener("input", () => {
-        const inputBarre = inputUstensiles.value;
-        if (inputBarre.length === 0) {
-            displayRecipes(recipes)
-        }
-        else{
-            recipesChosenArray = recipes
-            if (inputBarre.length >= 1) {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.ustensils.some(item =>
-                        item.toLowerCase().includes(inputBarre.toLowerCase())
-                    )
-                )
-                console.log(recipesChosenArray)
-                initLists(recipesChosenArray)     
-                displayRecipes(recipesChosenArray)
-            }
-            
-            if(inputBarre.length === 0){
-                displayRecipes(recipes)
-                initLists(recipes)
-                console.log("c'est 0")
-            }
-        
-            else if(recipesChosenArray.length === 0){  
-                noRecipes();
-            }
-        }     
-    })    
-}
-
-filtreIngredients()
-filtreAppareils()
-filtreUstensiles()
 
   //////////////////////////////////////////////////////
  //        OUVERTURE/FERMETURE DES BOUTONS           //
@@ -315,7 +209,6 @@ liste.forEach((i) => {
         }   
         closeTag()
         rerollCards()   
-        noRecipes()
     })
 })
 
@@ -367,8 +260,6 @@ function rerollCards() {
     } 
 
     else {
-        recipesChosenArray = recipes
-
         if (tagsArrayIngredients.length !== 0) {
             tagsArrayIngredients.forEach((tag) => {               
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
@@ -410,23 +301,94 @@ function rerollCards() {
 
 
 const barreChamp = document.querySelector(".search_bar")
-barreChamp.addEventListener("input", filtreBarre);
 
 
-function filtreBarre() {
-    let inputValue = barreChamp.value
+
+function filtreBarrePrincipale() {
+    barreChamp.addEventListener("input", () => {
+        let inputValue = barreChamp.value
    
-    if(inputValue.length >= 3){
-        recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
-        recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
-        recette.ingredients.some ((ingredient) => 
-        ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())));
+        if(inputValue.length >= 3){
+            recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
+            recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
+            recette.ingredients.some ((ingredient) => 
+            ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))
+                     
+            displayRecipes(recipesChosenArray)
+            initLists(recipesChosenArray)
+        }
         
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)
-    }
-    
-    if(inputValue.length == 0){
+        contrario(inputValue)
+    })   
+}
+
+const inputIngredients = document.querySelector(".input-ingredients");
+const inputAppareils = document.querySelector(".input-appareils");
+const inputUstensiles = document.querySelector(".input-ustensiles");
+
+
+function filtreIngredients(){
+    inputIngredients.addEventListener("input", () => {
+        const inputBarre = inputIngredients.value;
+
+        if(inputBarre.length >= 1){      
+            recipesChosenArray = recipes.filter((recipe) =>                
+                recipe.ingredients.some(ingredient =>                      
+                    ingredient.ingredient.toLowerCase().includes(inputBarre.toLowerCase())                       
+                )               
+            )   
+            console.log(recipesChosenArray)
+            initLists(recipesChosenArray)     
+            displayRecipes(recipesChosenArray)     
+        }   
+
+        contrario(inputBarre)              
+    })
+}
+
+function filtreAppareils(){
+    inputAppareils.addEventListener("input", () => {
+        const inputBarre = inputAppareils.value;
+        if (inputBarre.length >= 1) {
+            recipesChosenArray = recipes.filter((recipe) =>
+                recipe.appliance.toLowerCase().includes(inputBarre.toLowerCase())
+            )
+            console.log(recipesChosenArray)
+            initLists(recipesChosenArray)     
+            displayRecipes(recipesChosenArray)
+        }
+       
+        contrario(inputBarre)
+    })
+}
+
+function filtreUstensiles(){
+    inputUstensiles.addEventListener("input", () => {
+        const inputBarre = inputUstensiles.value;
+        if (inputBarre.length >= 1) {
+            recipesChosenArray = recipes.filter((recipe) =>
+                recipe.ustensils.some(item =>
+                    item.toLowerCase().includes(inputBarre.toLowerCase())
+                )
+            )
+            console.log(recipesChosenArray)
+            initLists(recipesChosenArray)     
+            displayRecipes(recipesChosenArray)
+        }
+        
+        contrario(inputBarre)      
+    })    
+}
+
+filtreBarrePrincipale()
+filtreIngredients()
+filtreAppareils()
+filtreUstensiles()
+
+
+
+function contrario(value){
+    if(value.length == 0){
         displayRecipes(recipes)
         initLists(recipes)
         console.log("c'est 0")
@@ -434,13 +396,8 @@ function filtreBarre() {
 
     else if(recipesChosenArray.length == 0){  
         noRecipes();
-    }
+    } 
 }
-
-
-
-
-
 
 
 
