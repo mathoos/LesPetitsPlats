@@ -44,10 +44,10 @@ body {
 }
 
 .recipes-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2.6vw;
-  padding-top: 5vh;
+  padding: 5vh 0;
 }
 .recipes-container--null {
   width: 100%;
@@ -55,7 +55,6 @@ body {
   background-color: rgb(231, 231, 231);
 }
 .recipes-container .recipes {
-  width: calc(33.3333333333% - 2.6vw);
   min-height: 47vh;
   border-radius: 5px;
   overflow: hidden;
@@ -171,6 +170,7 @@ body {
   font-size: 18px;
   color: white;
   font-weight: 700;
+  outline: none;
 }
 .menu_recherche .bouton .btn input::placeholder {
   color: white;
