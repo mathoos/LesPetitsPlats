@@ -62,9 +62,9 @@ let tabIngredients = [...new Set]
 let tabAppareils = [...new Set]
 let tabUstensiles = [...new Set]
 
-const listeIngredients = document.querySelector(".liste.ingredients");
-const listeAppareils = document.querySelector(".liste.appareils");
-const listeUstensiles = document.querySelector(".liste.ustensiles");
+const listeIngredients = document.querySelector(".bouton_liste.ingredients");
+const listeAppareils = document.querySelector(".bouton_liste.appareils");
+const listeUstensiles = document.querySelector(".bouton_liste.ustensiles");
 
 
 
@@ -113,8 +113,8 @@ function createList(tags, container){
 
 
 
-var openBtn = Array.from(document.querySelectorAll('.btn'))
 
+/*
 openBtn.forEach((btn) => {
 	btn.addEventListener("click", (e) => {
 		const dataType = e.target.closest("div").getAttribute("data-type")
@@ -124,6 +124,47 @@ openBtn.forEach((btn) => {
 		btn.lastElementChild.classList.toggle("active") 
 	})
 })
+*/
+
+var openBtn = document.querySelectorAll('.bouton')
+
+openBtn.forEach((btn, index) => {
+    let btnTitle = btn.querySelector(".bouton_title")
+    btnTitle.addEventListener("click", () => {
+        btn.classList.toggle("active")
+       
+        let btnListe = btn.querySelector(".bouton_liste")
+
+        if(btn.classList.contains("active")){
+            btnListe.classList.add("active")
+            btnTitle.classList.add("active")     
+            btnTitle.lastElementChild.classList.add("active")           
+        }
+
+        else{
+            btnListe.classList.remove("active")
+            btnTitle.classList.remove("active")  
+            btnTitle.lastElementChild.classList.remove("active")               
+        }
+
+        removeOpen(index)
+    })
+})
+
+function removeOpen(index1){
+    openBtn.forEach((btn, index2) => {
+        if(index1 != index2){
+            btn.classList.remove("active") 
+
+            let btnListe = btn.querySelector(".bouton_liste")
+            let btnTitle = btn.querySelector(".bouton_title")
+            btnListe.classList.remove("active")
+            btnTitle.classList.remove("active")  
+            btnTitle.lastElementChild.classList.remove("active")    
+        }
+    })
+}
+
 
 
   //////////////////////////////////////////////////////
@@ -155,7 +196,7 @@ let tagsArrayIngredients = []
 let tagsArrayAppareils = []
 let tagsArrayUstensiles = []
 
-const liste = Array.from(document.querySelectorAll(".liste"))
+const liste = Array.from(document.querySelectorAll(".bouton_liste"))
 liste.forEach((i) => {
     i.addEventListener("click", (e) => {    
         const tag =  createTag(e) 
@@ -210,9 +251,11 @@ function closeTag(){
 function rerollCards() {
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
         displayRecipes(recipes)
+        initLists(recipes)
     } 
 
     else {
+        recipesChosenArray = recipes
         if (tagsArrayIngredients.length !== 0) {
             tagsArrayIngredients.forEach((tag) => {               
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
@@ -303,7 +346,7 @@ function filtreIngredients(){
             listeIngredients.innerHTML = "" 
             
             createList(searchTagIngredient, listeIngredients)   
-            displayRecipes(recipesChosenArray)  
+            displayRecipes(recipesChosenArray) 
         }   
         
         else{

@@ -6,6 +6,7 @@
     border : none;
     font-family: "DM Sans", sans-serif;
     margin: 0;
+    text-decoration : none;
 }
 
 
@@ -47,6 +48,9 @@ body{
         background-color : rgba(231, 231, 231, 1);
         border-radius : 5px;
         padding : 2vh 1.2vw;
+        &::-webkit-search-cancel-button{
+            display : none;
+        }
     }
 
     &_icon{
@@ -176,64 +180,64 @@ body{
     .bouton{ 
         position : relative;      
         
-            .btn{
-                display : flex;
-                align-items : center;
-                justify-content : space-between;
-                gap : 2vw;
-                min-width : 10vw;                
-                padding : 2.7vh .9vw;
-                border-radius : 5px;  
-                cursor : pointer;
-                
-                &.active{
-                    width : 34.7vw;
-                    border-radius : 5px 5px 0 0;
-                }
+        &_title{
+            display : flex;
+            align-items : center;
+            justify-content : space-between;
+            gap : 2vw;
+            min-width : 10vw;                
+            padding : 2.7vh .9vw;
+            border-radius : 5px;  
+            cursor : pointer;
+            
+            &.active{
+                width : 34.7vw;
+                border-radius : 5px 5px 0 0;
+            }
 
-                &.ingredients{
-                    background-color: #3282F7;
-                }
-                &.appareils{
-                    background-color: #68D9A4;
-                }
-                &.ustensiles{
-                    background-color: #ED6454;
-                }
-    
-                input{
-                    width : 100%;
-                    font-size : 18px;
+            &.ingredients{
+                background-color: #3282F7;
+            }
+            &.appareils{
+                background-color: #68D9A4;
+            }
+            &.ustensiles{
+                background-color: #ED6454;
+            }
+
+            input{
+                width : 100%;
+                font-size : 18px;
+                color : white;
+                font-weight : 700;
+                outline : none;
+                &::placeholder{
                     color : white;
-                    font-weight : 700;
-                    outline : none;
-                    &::placeholder{
-                        color : white;
-                    }
-                }
-                
-
-                i{
-                    cursor : pointer;
-                    font-size : 1rem;
-                    color : white;
-                    transition : .5s ease;
-
-                    &.active{
-                        transform : rotate(180deg);
-                    }
                 }
             }
+            
+
+            i{
+                cursor : pointer;
+                font-size : 1rem;
+                color : white;
+                transition : .5s ease;
+
+                &.active{
+                    transform : rotate(180deg);
+                }
+            }
+        }
         
 
-        .liste{
+        &_liste{
             position : absolute;
             top : 100%;
             left : 0;
             display : none;
             flex-wrap: wrap;
             width : 34.7vw;
-            max-height : 50vh;
+            max-height : 50vh;      
             overflow-y: scroll;
             border-radius: 0 0 5px 5px;
 
