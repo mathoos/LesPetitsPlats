@@ -4,6 +4,7 @@
   border: none;
   font-family: "DM Sans", sans-serif;
   margin: 0;
+  text-decoration: none;
 }
 
 body {
@@ -36,6 +37,9 @@ body {
   background-color: rgb(231, 231, 231);
   border-radius: 5px;
   padding: 2vh 1.2vw;
+}
+.search_bar::-webkit-search-cancel-button {
+  display: none;
 }
 .search_icon {
   position: absolute;
@@ -142,7 +146,7 @@ body {
 .menu_recherche .bouton {
   position: relative;
 }
-.menu_recherche .bouton .btn {
+.menu_recherche .bouton_title {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -152,39 +156,39 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-.menu_recherche .bouton .btn.active {
+.menu_recherche .bouton_title.active {
   width: 34.7vw;
   border-radius: 5px 5px 0 0;
 }
-.menu_recherche .bouton .btn.ingredients {
+.menu_recherche .bouton_title.ingredients {
   background-color: #3282F7;
 }
-.menu_recherche .bouton .btn.appareils {
+.menu_recherche .bouton_title.appareils {
   background-color: #68D9A4;
 }
-.menu_recherche .bouton .btn.ustensiles {
+.menu_recherche .bouton_title.ustensiles {
   background-color: #ED6454;
 }
-.menu_recherche .bouton .btn input {
+.menu_recherche .bouton_title input {
   width: 100%;
   font-size: 18px;
   color: white;
   font-weight: 700;
   outline: none;
 }
-.menu_recherche .bouton .btn input::placeholder {
+.menu_recherche .bouton_title input::placeholder {
   color: white;
 }
-.menu_recherche .bouton .btn i {
+.menu_recherche .bouton_title i {
   cursor: pointer;
   font-size: 1rem;
   color: white;
   transition: 0.5s ease;
 }
-.menu_recherche .bouton .btn i.active {
+.menu_recherche .bouton_title i.active {
   transform: rotate(180deg);
 }
-.menu_recherche .bouton .liste {
+.menu_recherche .bouton_liste {
   position: absolute;
   top: 100%;
   left: 0;
@@ -195,11 +199,11 @@ body {
   overflow-y: scroll;
   border-radius: 0 0 5px 5px;
 }
-.menu_recherche .bouton .liste::-webkit-scrollbar {
+.menu_recherche .bouton_liste::-webkit-scrollbar {
   width: 10px;
   border-radius: 10px;
 }
-.menu_recherche .bouton .liste::-webkit-scrollbar-thumb {
+.menu_recherche .bouton_liste::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.351);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6.9px);
@@ -207,22 +211,22 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
 }
-.menu_recherche .bouton .liste p {
+.menu_recherche .bouton_liste p {
   color: white;
   padding: 2vh 1vw;
   width: 33.3333333333%;
   cursor: pointer;
 }
-.menu_recherche .bouton .liste.active {
+.menu_recherche .bouton_liste.active {
   display: flex;
 }
-.menu_recherche .bouton .liste.ingredients {
+.menu_recherche .bouton_liste.ingredients {
   background-color: #3282F7;
 }
-.menu_recherche .bouton .liste.appareils {
+.menu_recherche .bouton_liste.appareils {
   background-color: #68D9A4;
 }
-.menu_recherche .bouton .liste.ustensiles {
+.menu_recherche .bouton_liste.ustensiles {
   background-color: #ED6454;
 }
 
