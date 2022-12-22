@@ -293,19 +293,48 @@ function rerollCards() {
 ///////////////////////////////////////////////////////
 //    FILTRE BARRE DE RECHERCHE PRINCIPALE           //
 ///////////////////////////////////////////////////////
-
+function uniq(a) {
+    return Array.from(new Set(a))
+}
 
 const barreChamp = document.querySelector(".search_bar")
 
 function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
         let inputValue = barreChamp.value.trim()
+        let searchIngredient = [...new Set]
+        let searchName = [...new Set]
+        let searchDescription = [...new Set]
    
         if(inputValue.length >= 3){
-            recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
-            recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
-            recette.ingredients.some ((ingredient) => 
-            ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))
+            let searchIngredient = []
+            let searchName = []
+            let searchDescription = []
+
+
+            for (let j = 0; j < recipes.length; j++) {
+                for (let k = 0; k < recipes[j].ingredients.length; k++) {
+                    if (recipes[j].ingredients[k].ingredient.toLowerCase().includes(inputValue.toLowerCase())) {
+                        searchIngredient.push(recipes[j]);
+                    }
+                    break;
+                }
+            }
+        
+            for (let j = 0; j < recipes.length; j++) {
+                if (recipes[j].name.toLowerCase().includes(inputValue.toLowerCase())) {
+                    searchName.push(recipes[j]);
+                }
+            }
+        
+            for (let j = 0; j < recipes.length; j++) {
+                if (recipes[j].description.toLowerCase().includes(inputValue.toLowerCase())) {
+                    searchDescription.push(recipes[j]);
+                }
+            }
+            console.log(recipesChosenArray)
+
+            recipesChosenArray = [...new Set(searchIngredient)], [...new Set(searchName)], [...new Set(searchDescription)]
                      
             displayRecipes(recipesChosenArray)
             initLists(recipesChosenArray)
@@ -318,6 +347,8 @@ function filtreBarrePrincipale() {
         noRecipes()  
     })   
 }
+
+
 
 
 ///////////////////////////////////////////////////////
