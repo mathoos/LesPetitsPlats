@@ -293,18 +293,12 @@ function rerollCards() {
 ///////////////////////////////////////////////////////
 //    FILTRE BARRE DE RECHERCHE PRINCIPALE           //
 ///////////////////////////////////////////////////////
-function uniq(a) {
-    return Array.from(new Set(a))
-}
 
 const barreChamp = document.querySelector(".search_bar")
 
 function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
         let inputValue = barreChamp.value.trim()
-        let searchIngredient = [...new Set]
-        let searchName = [...new Set]
-        let searchDescription = [...new Set]
    
         if(inputValue.length >= 3){
             let searchIngredient = []
@@ -317,7 +311,6 @@ function filtreBarrePrincipale() {
                     if (recipes[j].ingredients[k].ingredient.toLowerCase().includes(inputValue.toLowerCase())) {
                         searchIngredient.push(recipes[j]);
                     }
-                    break;
                 }
             }
         
@@ -332,9 +325,9 @@ function filtreBarrePrincipale() {
                     searchDescription.push(recipes[j]);
                 }
             }
-            console.log(recipesChosenArray)
 
-            recipesChosenArray = [...new Set(searchIngredient)], [...new Set(searchName)], [...new Set(searchDescription)]
+            recipesChosenArray = [...searchIngredient, ...searchName, ...searchDescription]
+            recipesChosenArray = Array.from(new Set(recipesChosenArray))
                      
             displayRecipes(recipesChosenArray)
             initLists(recipesChosenArray)
@@ -347,8 +340,6 @@ function filtreBarrePrincipale() {
         noRecipes()  
     })   
 }
-
-
 
 
 ///////////////////////////////////////////////////////
