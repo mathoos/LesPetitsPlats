@@ -251,35 +251,82 @@ function closeTag(){
 function rerollCards() {
 
     let inputValue = barreChamp.value.trim()
+    const inputBarreIngredients = inputIngredients.value;
+    const inputBarreAppareils = inputAppareils.value;
+    const inputBarreUstensiles = inputUstensiles.value;
    
-        if(inputValue.length >= 3){
-            let searchIngredient = []
-            let searchName = []
-            let searchDescription = []
+    if(inputValue.length >= 3){
+        let searchIngredient = []
+        let searchName = []
+        let searchDescription = []
 
-            for (let j = 0; j < recipes.length; j++) {
-                for (let k = 0; k < recipes[j].ingredients.length; k++) {
-                    if (recipes[j].ingredients[k].ingredient.toLowerCase().includes(inputValue.toLowerCase())) {
-                        searchIngredient.push(recipes[j]);
-                    }
+        for (let j = 0; j < recipes.length; j++) {
+            for (let k = 0; k < recipes[j].ingredients.length; k++) {
+                if (recipes[j].ingredients[k].ingredient.toLowerCase().includes(inputValue.toLowerCase())) {
+                    searchIngredient.push(recipes[j]);
                 }
             }
-        
-            for (let j = 0; j < recipes.length; j++) {
-                if (recipes[j].name.toLowerCase().includes(inputValue.toLowerCase())) {
-                    searchName.push(recipes[j]);
-                }
-            }
-        
-            for (let j = 0; j < recipes.length; j++) {
-                if (recipes[j].description.toLowerCase().includes(inputValue.toLowerCase())) {
-                    searchDescription.push(recipes[j]);
-                }
-            }
-
-            recipesChosenArray = [...searchIngredient, ...searchName, ...searchDescription]
-            recipesChosenArray = Array.from(new Set(recipesChosenArray))        
         }
+    
+        for (let j = 0; j < recipes.length; j++) {
+            if (recipes[j].name.toLowerCase().includes(inputValue.toLowerCase())) {
+                searchName.push(recipes[j]);
+            }
+        }
+    
+        for (let j = 0; j < recipes.length; j++) {
+            if (recipes[j].description.toLowerCase().includes(inputValue.toLowerCase())) {
+                searchDescription.push(recipes[j]);
+            }
+        }
+
+        recipesChosenArray = [...searchIngredient, ...searchName, ...searchDescription]
+        recipesChosenArray = Array.from(new Set(recipesChosenArray))        
+    }
+
+    if(inputBarreIngredients.length >= 1){      
+        recipesChosenArray = recipesChosenArray.filter((recipe) =>                
+            recipe.ingredients.some(ingredient =>                      
+                ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
+            )               
+        ) 
+        const searchTagIngredient = tabIngredients.filter((item) => {
+            return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
+        }) 
+
+        listeIngredients.innerHTML = ""          
+        createList(searchTagIngredient, listeIngredients)   
+    } 
+
+    if (inputBarreAppareils.length >= 1) {
+        recipesChosenArray = recipesChosenArray.filter((recipe) =>
+            recipe.appliance.toLowerCase().includes(inputBarreAppareils.toLowerCase())
+        )
+
+        const searchTagAppareil = tabAppareils.filter((item) => {
+            return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
+        }) 
+        
+        listeAppareils.innerHTML = ""           
+        createList(searchTagAppareil, listeAppareils)     
+    } 
+
+    if (inputBarreUstensiles.length >= 1) {
+        recipesChosenArray = recipesChosenArray.filter((recipe) =>
+            recipe.ustensils.some(item =>
+                item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())
+            )
+        )
+
+        const searchTagUstensile = tabUstensiles.filter((item) => {
+            return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
+        }) 
+        
+        listeUstensiles.innerHTML = ""            
+        createList(searchTagUstensile, listeUstensiles)     
+    } 
+
+    
 
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
         displayRecipes(recipesChosenArray)
@@ -347,83 +394,66 @@ const inputUstensiles = document.querySelector(".input-ustensiles");
 
 function filtreIngredients(){
     inputIngredients.addEventListener("input", () => {
-        const inputBarre = inputIngredients.value;
-
-        if(inputBarre.length >= 1){      
-            recipesChosenArray = recipes.filter((recipe) =>                
+        rerollCards()
+        noRecipes()
+        const inputBarreIngredients = inputIngredients.value;
+        if(inputBarreIngredients.length >= 1){      
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>                
                 recipe.ingredients.some(ingredient =>                      
-                    ingredient.ingredient.toLowerCase().includes(inputBarre.toLowerCase())                       
+                    ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
                 )               
             ) 
             const searchTagIngredient = tabIngredients.filter((item) => {
-                return item.toLowerCase().includes(inputBarre.toLowerCase())           
+                return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
             }) 
 
-            listeIngredients.innerHTML = "" 
-            
-            createList(searchTagIngredient, listeIngredients)   
-            displayRecipes(recipesChosenArray) 
-        }   
-        
-        else{
-            init()
-        }   
-        
-        noRecipes()               
+            listeIngredients.innerHTML = ""            
+            createList(searchTagIngredient, listeIngredients)    
+        }               
     })
 }
 
 function filtreAppareils(){
     inputAppareils.addEventListener("input", () => {
-        const inputBarre = inputAppareils.value;
-        if (inputBarre.length >= 1) {
-            recipesChosenArray = recipes.filter((recipe) =>
-                recipe.appliance.toLowerCase().includes(inputBarre.toLowerCase())
+        rerollCards()
+        noRecipes()
+
+        const inputBarreAppareils = inputAppareils.value;
+        if (inputBarreAppareils.length >= 1) {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.appliance.toLowerCase().includes(inputBarreAppareils.toLowerCase())
             )
 
             const searchTagAppareil = tabAppareils.filter((item) => {
-                return item.toLowerCase().includes(inputBarre.toLowerCase())           
+                return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
             }) 
             
-            listeAppareils.innerHTML = "" 
-            
-            createList(searchTagAppareil, listeAppareils)    
-            displayRecipes(recipesChosenArray)  
-        }
-       
-        if(inputBarre.length == 0){
-            init()
-        }   
-        
-        noRecipes()  
+            listeAppareils.innerHTML = ""           
+            createList(searchTagAppareil, listeAppareils)     
+        } 
     })
 }
 
 function filtreUstensiles(){
     inputUstensiles.addEventListener("input", () => {
-        const inputBarre = inputUstensiles.value;
-        if (inputBarre.length >= 1) {
-            recipesChosenArray = recipes.filter((recipe) =>
+        rerollCards()
+        noRecipes()
+
+        const inputBarreUstensiles = inputUstensiles.value;
+        if (inputBarreUstensiles.length >= 1) {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
                 recipe.ustensils.some(item =>
-                    item.toLowerCase().includes(inputBarre.toLowerCase())
+                    item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())
                 )
             )
 
             const searchTagUstensile = tabUstensiles.filter((item) => {
-                return item.toLowerCase().includes(inputBarre.toLowerCase())           
+                return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
             }) 
             
-            listeUstensiles.innerHTML = "" 
-            
-            createList(searchTagUstensile, listeUstensiles)    
-            displayRecipes(recipesChosenArray)  
-        }
-        
-        if(inputBarre.length == 0){
-            init()
-        }   
-        
-        noRecipes()   
+            listeUstensiles.innerHTML = ""            
+            createList(searchTagUstensile, listeUstensiles)     
+        } 
     })    
 }
 
