@@ -110,7 +110,6 @@ function createList(tags, container){
  //        OUVERTURE/FERMETURE DES BOUTONS           //
 //////////////////////////////////////////////////////
 
-
 var openBtn = document.querySelectorAll('.bouton')
 
 openBtn.forEach((btn, index) => {
@@ -152,9 +151,9 @@ function removeOpen(index1){
 
 
 
-  //////////////////////////////////////////////////////
- //        CREATION DES TAGS                         //
-//////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////
+ //             CREER UN TAG                       //
+////////////////////////////////////////////////////
 
 var sectionTag = document.querySelector(".section-tag");
 
@@ -182,32 +181,33 @@ let tagsArrayUstensiles = []
 
 const liste = Array.from(document.querySelectorAll(".bouton_liste"))
 
-    liste.forEach((i) => {
-        i.addEventListener("click", (e) => {         
-            const tag =  createTag(e) 
-            const dataType = i.getAttribute("data-type")
-            tag.setAttribute("data-type", `${dataType}`)
-            tag.classList.add(dataType)
+liste.forEach((i) => {
+    i.addEventListener("click", (e) => {         
+        const tag =  createTag(e) 
+        const dataType = i.getAttribute("data-type")
+        tag.setAttribute("data-type", `${dataType}`)
+        tag.classList.add(dataType)
 
-            if (dataType === "ingredients") {    
-                tagsArrayIngredients.push(tag.textContent.trim())                       
-                console.log(tagsArrayIngredients)                          
-            }
-            if (dataType === "appareils") {                          
-                tagsArrayAppareils.push(tag.textContent.trim())  
-                console.log(tagsArrayAppareils)           
-            }
-            if (dataType === "ustensiles") {               
-                tagsArrayUstensiles.push(tag.textContent.trim())      
-                console.log(tagsArrayUstensiles)          
-            }   
-            closeTag()
-            rerollCards()  
-        })
+        if (dataType === "ingredients") {    
+            tagsArrayIngredients.push(tag.textContent.trim())                                              
+        }
+        if (dataType === "appareils") {                          
+            tagsArrayAppareils.push(tag.textContent.trim())           
+        }
+        if (dataType === "ustensiles") {               
+            tagsArrayUstensiles.push(tag.textContent.trim())               
+        }   
+        closeTag()
+        rerollCards()  
     })
+})
 
 
 
+
+  ///////////////////////////////////
+ //    SUPPRIMER UN TAG           //
+///////////////////////////////////
 
 function closeTag(){
     let tagsClose = document.querySelectorAll(".far.fa-times-circle.close-tag")
@@ -235,6 +235,111 @@ function closeTag(){
 }
 
 
+
+
+  ///////////////////////////////////////////////////////
+ //    FILTRE BARRE DE RECHERCHE PRINCIPALE           //
+///////////////////////////////////////////////////////
+
+const barreChamp = document.querySelector(".search_bar")
+
+function filtreBarrePrincipale() {
+    barreChamp.addEventListener("input", () => {
+        rerollCards()       
+        noRecipes()  
+
+        const inputValue = barreChamp.value.trim()
+        if(inputValue.length >= 3){
+            recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
+            recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
+            recette.ingredients.some ((ingredient) => 
+            ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
+        }
+    })   
+}
+
+
+
+
+  ///////////////////////////////////////////////////////
+ //             FILTRE PAR TAGS                       //
+///////////////////////////////////////////////////////
+
+const inputIngredients = document.querySelector(".input-ingredients");
+const inputAppareils = document.querySelector(".input-appareils");
+const inputUstensiles = document.querySelector(".input-ustensiles");
+
+
+function filtreIngredients(){
+    inputIngredients.addEventListener("input", () => {
+        rerollCards()
+        noRecipes()
+
+        const inputBarreIngredients = inputIngredients.value;
+        if(inputBarreIngredients.length >= 1){      
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>                
+                recipe.ingredients.some(ingredient =>                      
+                    ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
+                )               
+            ) 
+            const searchTagIngredient = tabIngredients.filter((item) => {
+                return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
+            }) 
+
+            listeIngredients.innerHTML = ""         
+            createList(searchTagIngredient, listeIngredients)   
+        }                 
+    })
+}
+
+function filtreAppareils(){  
+    inputAppareils.addEventListener("input", () => {
+        rerollCards()
+        noRecipes()
+        const inputBarreAppareils = inputAppareils.value;
+        if (inputBarreAppareils.length >= 1) {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.appliance.toLowerCase().includes(inputBarreAppareils.toLowerCase())
+            )
+
+            const searchTagAppareil = tabAppareils.filter((item) => {
+                return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
+            }) 
+            
+            listeAppareils.innerHTML = ""            
+            createList(searchTagAppareil, listeAppareils)    
+        }
+    })
+}
+
+function filtreUstensiles(){
+    inputUstensiles.addEventListener("input", () => {
+        rerollCards()
+        noRecipes()
+        const inputBarreUstensiles = inputUstensiles.value;
+        if (inputBarreUstensiles.length >= 1) {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.ustensils.some(item =>
+                    item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())
+                )
+            )
+
+            const searchTagUstensile = tabUstensiles.filter((item) => {
+                return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
+            }) 
+            
+            listeUstensiles.innerHTML = ""          
+            createList(searchTagUstensile, listeUstensiles)      
+        }  
+    })    
+}
+
+
+
+
+  /////////////////////////////////////////////////////
+ //             FONCTION PRINCIPALE                 //
+/////////////////////////////////////////////////////
 
 
 function rerollCards() {
@@ -337,104 +442,9 @@ function rerollCards() {
 
 
 
-///////////////////////////////////////////////////////
-//    FILTRE BARRE DE RECHERCHE PRINCIPALE           //
-///////////////////////////////////////////////////////
-
-
-const barreChamp = document.querySelector(".search_bar")
-
-function filtreBarrePrincipale() {
-    barreChamp.addEventListener("input", () => {
-        rerollCards()       
-        noRecipes()  
-
-        const inputValue = barreChamp.value.trim()
-        if(inputValue.length >= 3){
-            recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
-            recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
-            recette.ingredients.some ((ingredient) => 
-            ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
-        }
-    })   
-}
-
-
-///////////////////////////////////////////////////////
-//             FILTRE PAR TAGS                       //
-///////////////////////////////////////////////////////
-
-const inputIngredients = document.querySelector(".input-ingredients");
-const inputAppareils = document.querySelector(".input-appareils");
-const inputUstensiles = document.querySelector(".input-ustensiles");
-
-
-function filtreIngredients(){
-    inputIngredients.addEventListener("input", () => {
-        rerollCards()
-        noRecipes()
-
-        const inputBarreIngredients = inputIngredients.value;
-        if(inputBarreIngredients.length >= 1){      
-            recipesChosenArray = recipesChosenArray.filter((recipe) =>                
-                recipe.ingredients.some(ingredient =>                      
-                    ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
-                )               
-            ) 
-            const searchTagIngredient = tabIngredients.filter((item) => {
-                return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
-            }) 
-
-            listeIngredients.innerHTML = ""         
-            createList(searchTagIngredient, listeIngredients)   
-        }                 
-    })
-}
-
-function filtreAppareils(){  
-    inputAppareils.addEventListener("input", () => {
-        rerollCards()
-        noRecipes()
-        const inputBarreAppareils = inputAppareils.value;
-        if (inputBarreAppareils.length >= 1) {
-            recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                recipe.appliance.toLowerCase().includes(inputBarreAppareils.toLowerCase())
-            )
-
-            const searchTagAppareil = tabAppareils.filter((item) => {
-                return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
-            }) 
-            
-            listeAppareils.innerHTML = ""            
-            createList(searchTagAppareil, listeAppareils)    
-        }
-    })
-}
-
-function filtreUstensiles(){
-    inputUstensiles.addEventListener("input", () => {
-        rerollCards()
-        noRecipes()
-        const inputBarreUstensiles = inputUstensiles.value;
-        if (inputBarreUstensiles.length >= 1) {
-            recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                recipe.ustensils.some(item =>
-                    item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())
-                )
-            )
-
-            const searchTagUstensile = tabUstensiles.filter((item) => {
-                return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
-            }) 
-            
-            listeUstensiles.innerHTML = ""          
-            createList(searchTagUstensile, listeUstensiles)      
-        }  
-    })    
-}
-
-
-
+  ///////////////////////////////////////////////////////////
+ //         MESSAGE SI RECETTES OU TAGS INVALIDES         //
+///////////////////////////////////////////////////////////
 
 
 function noRecipes(){
@@ -454,7 +464,9 @@ function noRecipes(){
 
 
 
-
+  ////////////////////////////////////////////////
+ //         FONCTION D'INITIALISATION          //
+////////////////////////////////////////////////
 
 function init(){
 	displayRecipes(recipes)	
