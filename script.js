@@ -238,7 +238,7 @@ function closeTag(){
 
 
 function rerollCards() {
-    recipesChosenArray = recipes
+    let recipesChosenArray = recipes
     let inputValue = barreChamp.value.trim()
 
     if(inputValue.length >= 3){
@@ -246,8 +246,7 @@ function rerollCards() {
         recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.ingredients.some ((ingredient) => 
         ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))
-                 
-        
+                      
     }
 
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
@@ -255,8 +254,7 @@ function rerollCards() {
         initLists(recipesChosenArray)
     } 
 
-    else {
-       
+    else {      
         if (tagsArrayIngredients.length !== 0) {
             tagsArrayIngredients.forEach((tag) => {    
                 console.log(tagsArrayIngredients)           
@@ -301,12 +299,7 @@ const barreChamp = document.querySelector(".search_bar")
 
 function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
-       
-   
-        
-        
-        rerollCards()
-        
+        rerollCards()       
         noRecipes()  
     })   
 }
