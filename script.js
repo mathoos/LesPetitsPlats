@@ -246,7 +246,6 @@ const barreChamp = document.querySelector(".search_bar")
 function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
         rerollCards()       
-        noRecipes()  
 
         const inputValue = barreChamp.value.trim()
         if(inputValue.length >= 3){
@@ -272,9 +271,7 @@ const inputUstensiles = document.querySelector(".input-ustensiles");
 
 function filtreIngredients(){
     inputIngredients.addEventListener("input", () => {
-        rerollCards()
-        noRecipes()
-
+        
         const inputBarreIngredients = inputIngredients.value;
         if(inputBarreIngredients.length >= 1){      
             recipesChosenArray = recipesChosenArray.filter((recipe) =>                
@@ -287,15 +284,15 @@ function filtreIngredients(){
             }) 
 
             listeIngredients.innerHTML = ""         
-            createList(searchTagIngredient, listeIngredients)   
-        }                 
+            createList(searchTagIngredient, listeIngredients)  
+        }                
     })
+    
 }
 
 function filtreAppareils(){  
     inputAppareils.addEventListener("input", () => {
-        rerollCards()
-        noRecipes()
+        
         const inputBarreAppareils = inputAppareils.value;
         if (inputBarreAppareils.length >= 1) {
             recipesChosenArray = recipesChosenArray.filter((recipe) =>
@@ -307,15 +304,14 @@ function filtreAppareils(){
             }) 
             
             listeAppareils.innerHTML = ""            
-            createList(searchTagAppareil, listeAppareils)    
+            createList(searchTagAppareil, listeAppareils)  
         }
     })
 }
 
 function filtreUstensiles(){
     inputUstensiles.addEventListener("input", () => {
-        rerollCards()
-        noRecipes()
+        
         const inputBarreUstensiles = inputUstensiles.value;
         if (inputBarreUstensiles.length >= 1) {
             recipesChosenArray = recipesChosenArray.filter((recipe) =>
@@ -329,7 +325,7 @@ function filtreUstensiles(){
             }) 
             
             listeUstensiles.innerHTML = ""          
-            createList(searchTagUstensile, listeUstensiles)      
+            createList(searchTagUstensile, listeUstensiles)    
         }  
     })    
 }
@@ -345,60 +341,14 @@ function filtreUstensiles(){
 function rerollCards() {
     let recipesChosenArray = recipes
     const inputValue = barreChamp.value.trim()
-    const inputBarreIngredients = inputIngredients.value;
-    const inputBarreAppareils = inputAppareils.value;
-    const inputBarreUstensiles = inputUstensiles.value;
 
-    if(inputValue.length >= 3){
+
+    if(inputValue.length  >= 3){
         recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.ingredients.some ((ingredient) => 
         ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
     }
-
-    if(inputBarreIngredients.length >= 1){      
-        recipesChosenArray = recipesChosenArray.filter((recipe) =>                
-            recipe.ingredients.some(ingredient =>                      
-                ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
-            )               
-        ) 
-        const searchTagIngredient = tabIngredients.filter((item) => {
-            return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
-        }) 
-
-        listeIngredients.innerHTML = ""        
-        createList(searchTagIngredient, listeIngredients)    
-    }   
-
-    
-    if (inputBarreAppareils.length >= 1) {
-        recipesChosenArray = recipesChosenArray.filter((recipe) =>
-            recipe.appliance.toLowerCase().includes(inputBarreAppareils.toLowerCase())
-        )
-
-        const searchTagAppareil = tabAppareils.filter((item) => {
-            return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
-        }) 
-        
-        listeAppareils.innerHTML = ""            
-        createList(searchTagAppareil, listeAppareils)    
-    }
-
-    
-    if (inputBarreUstensiles.length >= 1) {
-        recipesChosenArray = recipesChosenArray.filter((recipe) =>
-            recipe.ustensils.some(item =>
-                item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())
-            )
-        )
-
-        const searchTagUstensile = tabUstensiles.filter((item) => {
-            return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
-        }) 
-        
-        listeUstensiles.innerHTML = ""          
-        createList(searchTagUstensile, listeUstensiles)      
-    } 
 
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
         displayRecipes(recipesChosenArray)
@@ -437,7 +387,9 @@ function rerollCards() {
 
         displayRecipes(recipesChosenArray)
         initLists(recipesChosenArray)
+        
     }
+    noRecipes()
 }
 
 
