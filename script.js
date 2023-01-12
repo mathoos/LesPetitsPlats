@@ -249,13 +249,44 @@ function closeTag(){
 
 
 function rerollCards() {
+
+    let inputValue = barreChamp.value.trim()
+   
+        if(inputValue.length >= 3){
+            let searchIngredient = []
+            let searchName = []
+            let searchDescription = []
+
+            for (let j = 0; j < recipes.length; j++) {
+                for (let k = 0; k < recipes[j].ingredients.length; k++) {
+                    if (recipes[j].ingredients[k].ingredient.toLowerCase().includes(inputValue.toLowerCase())) {
+                        searchIngredient.push(recipes[j]);
+                    }
+                }
+            }
+        
+            for (let j = 0; j < recipes.length; j++) {
+                if (recipes[j].name.toLowerCase().includes(inputValue.toLowerCase())) {
+                    searchName.push(recipes[j]);
+                }
+            }
+        
+            for (let j = 0; j < recipes.length; j++) {
+                if (recipes[j].description.toLowerCase().includes(inputValue.toLowerCase())) {
+                    searchDescription.push(recipes[j]);
+                }
+            }
+
+            recipesChosenArray = [...searchIngredient, ...searchName, ...searchDescription]
+            recipesChosenArray = Array.from(new Set(recipesChosenArray))        
+        }
+
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
-        displayRecipes(recipes)
-        initLists(recipes)
+        displayRecipes(recipesChosenArray)
+        initLists(recipesChosenArray)
     } 
 
-    else {
-        recipesChosenArray = recipes
+    else {    
         if (tagsArrayIngredients.length !== 0) {
             tagsArrayIngredients.forEach((tag) => {               
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
@@ -283,6 +314,7 @@ function rerollCards() {
                 )
             })
         }
+
         displayRecipes(recipesChosenArray)
         initLists(recipesChosenArray)
     }
@@ -298,45 +330,7 @@ const barreChamp = document.querySelector(".search_bar")
 
 function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
-        let inputValue = barreChamp.value.trim()
-   
-        if(inputValue.length >= 3){
-            let searchIngredient = []
-            let searchName = []
-            let searchDescription = []
-
-
-            for (let j = 0; j < recipes.length; j++) {
-                for (let k = 0; k < recipes[j].ingredients.length; k++) {
-                    if (recipes[j].ingredients[k].ingredient.toLowerCase().includes(inputValue.toLowerCase())) {
-                        searchIngredient.push(recipes[j]);
-                    }
-                }
-            }
-        
-            for (let j = 0; j < recipes.length; j++) {
-                if (recipes[j].name.toLowerCase().includes(inputValue.toLowerCase())) {
-                    searchName.push(recipes[j]);
-                }
-            }
-        
-            for (let j = 0; j < recipes.length; j++) {
-                if (recipes[j].description.toLowerCase().includes(inputValue.toLowerCase())) {
-                    searchDescription.push(recipes[j]);
-                }
-            }
-
-            recipesChosenArray = [...searchIngredient, ...searchName, ...searchDescription]
-            recipesChosenArray = Array.from(new Set(recipesChosenArray))
-                     
-            displayRecipes(recipesChosenArray)
-            initLists(recipesChosenArray)
-        }
-        
-        else{
-            init()
-        }   
-        
+        rerollCards()       
         noRecipes()  
     })   
 }
@@ -445,10 +439,13 @@ function noRecipes(){
 
     if(recipesChosenArray.length == 0){  
         noRecipes.innerHTML = 
-    `
-        <div class="recipes-container--null">Aucune recette ne correspond à votre recherche.</div>
-    `
-    }  
+        `
+            <div class="recipes-container--null">Aucune recette ne correspond à votre recherche.</div>
+        `
+    }
+    /*else{
+        noRecipes.innerHTML = ""
+    }*/
 }
 
 
