@@ -248,8 +248,7 @@ function rerollCards() {
         recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.ingredients.some ((ingredient) => 
-        ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))
-                      
+        ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
     }
 
     if(inputBarreIngredients.length >= 1){      
@@ -262,10 +261,8 @@ function rerollCards() {
             return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
         }) 
 
-        listeIngredients.innerHTML = "" 
-        
-        createList(searchTagIngredient, listeIngredients)   
-        displayRecipes(recipesChosenArray) 
+        listeIngredients.innerHTML = ""        
+        createList(searchTagIngredient, listeIngredients)    
     }   
 
     
@@ -279,8 +276,7 @@ function rerollCards() {
         }) 
         
         listeAppareils.innerHTML = ""            
-        createList(searchTagAppareil, listeAppareils)
-        displayRecipes(recipesChosenArray)    
+        createList(searchTagAppareil, listeAppareils)    
     }
 
     
