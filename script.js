@@ -329,6 +329,7 @@ function rerollCards() {
                 )
             })
         }
+
         displayRecipes(recipesChosenArray)
         initLists(recipesChosenArray)
     }
@@ -347,6 +348,14 @@ function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
         rerollCards()       
         noRecipes()  
+
+        const inputValue = barreChamp.value.trim()
+        if(inputValue.length >= 3){
+            recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
+            recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
+            recette.ingredients.some ((ingredient) => 
+            ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
+        }
     })   
 }
 
@@ -431,12 +440,16 @@ function filtreUstensiles(){
 function noRecipes(){
     let noRecipes = document.querySelector(".no-recipes")
 
-    if(recipesChosenArray.length == 0){  
+    if(recipesChosenArray.length === 0){ 
+        console.log("rien ne correspond") 
         noRecipes.innerHTML = 
         `
             <div class="recipes-container--null">Aucune recette ne correspond à votre recherche.</div>
         `
     }  
+    else{
+        noRecipes.innerHTML = ""
+    }
 }
 
 
