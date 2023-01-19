@@ -101,7 +101,7 @@ function createList(tags, container){
         const p = document.createElement("p");
         p.innerHTML = tag;
         container.appendChild(p);
-    })   
+    })      
 }
 
 
@@ -279,15 +279,22 @@ function filtreIngredients(){
                     ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
                 )               
             ) 
-            const searchTagIngredient = tabIngredients.filter((item) => {
+            const searchTagIngredient = tabIngredients.filter((item) => {             
                 return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
             }) 
-
-            listeIngredients.innerHTML = ""         
-            createList(searchTagIngredient, listeIngredients)  
-        }                
-    })
-    
+           
+            if(searchTagIngredient.length === 0){             
+                let noTags = document.createElement("p")
+                noTags.innerHTML = "Aucun tag ne correspond à votre recherche."
+                listeIngredients.innerHTML = ""
+                listeIngredients.appendChild(noTags)              
+            }
+            else{
+                listeIngredients.innerHTML = ""          
+                createList(searchTagIngredient, listeIngredients)               
+            }                                     
+        }                        
+    })   
 }
 
 function filtreAppareils(){  
@@ -342,7 +349,6 @@ function rerollCards() {
     let recipesChosenArray = recipes
     const inputValue = barreChamp.value.trim()
 
-
     if(inputValue.length  >= 3){
         recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
@@ -353,6 +359,7 @@ function rerollCards() {
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
         displayRecipes(recipesChosenArray)
         initLists(recipesChosenArray)
+        noRecipes() 
     } 
 
     else {      
@@ -386,10 +393,8 @@ function rerollCards() {
         }
 
         displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)
-        
-    }
-    noRecipes()
+        initLists(recipesChosenArray)  
+    }     
 }
 
 
@@ -403,7 +408,6 @@ function noRecipes(){
     let noRecipes = document.querySelector(".no-recipes")
 
     if(recipesChosenArray.length === 0){ 
-        console.log("rien ne correspond") 
         noRecipes.innerHTML = 
         `
             <div class="recipes-container--null">Aucune recette ne correspond à votre recherche.</div>
