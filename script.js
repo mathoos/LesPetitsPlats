@@ -285,15 +285,16 @@ function filtreIngredients(){
            
             if(searchTagIngredient.length === 0){             
                 let noTags = document.createElement("p")
+                noTags.classList.add("null")
                 noTags.innerHTML = "Aucun tag ne correspond à votre recherche."
                 listeIngredients.innerHTML = ""
                 listeIngredients.appendChild(noTags)              
             }
             else{
                 listeIngredients.innerHTML = ""          
-                createList(searchTagIngredient, listeIngredients)               
-            }                                     
-        }                        
+                createList(searchTagIngredient, listeIngredients)                                                       
+            }  
+        }                   
     })   
 }
 
@@ -353,13 +354,13 @@ function rerollCards() {
         recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
         recette.ingredients.some ((ingredient) => 
-        ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
+        ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))   
     }
 
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
         displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)
-        noRecipes() 
+        initLists(recipesChosenArray) 
+        noRecipes()    
     } 
 
     else {      
@@ -393,7 +394,7 @@ function rerollCards() {
         }
 
         displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)  
+        initLists(recipesChosenArray)      
     }     
 }
 
@@ -408,13 +409,11 @@ function noRecipes(){
     let noRecipes = document.querySelector(".no-recipes")
 
     if(recipesChosenArray.length === 0){ 
-        noRecipes.innerHTML = 
-        `
-            <div class="recipes-container--null">Aucune recette ne correspond à votre recherche.</div>
-        `
+        noRecipes.style.display = "block"
     }  
-    else{
-        noRecipes.innerHTML = ""
+
+    else if(recipesChosenArray.length > 0){
+        noRecipes.style.display = "none"
     }
 }
 

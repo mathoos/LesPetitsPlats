@@ -53,11 +53,6 @@ body {
   gap: 2.6vw;
   padding: 5vh 0;
 }
-.recipes-container--null {
-  width: 100%;
-  padding: 1vw;
-  background-color: rgb(231, 231, 231);
-}
 .recipes-container .recipes {
   min-height: 47vh;
   border-radius: 5px;
@@ -110,6 +105,13 @@ body {
 }
 .recipes-container .recipes_bottom-details--txt p {
   font-size: 12px;
+}
+
+.no-recipes {
+  display: none;
+  width: 100%;
+  padding: 1vw;
+  background-color: rgb(231, 231, 231);
 }
 
 .section-tag {
@@ -216,6 +218,9 @@ body {
   padding: 2vh 1vw;
   width: 33.3333333333%;
   cursor: pointer;
+}
+.menu_recherche .bouton_liste p.null {
+  width: 100%;
 }
 .menu_recherche .bouton_liste.active {
   display: flex;

@@ -4,8 +4,15 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "sass": "sass --watch ./sass/style.scss:./css/style.css ./sass/main.scss:./css/main.css"
+    "sass": "sass --watch ./sass/style.scss:./css/style.css ./sass/main.scss:./css/main.css",
+    "eslint": "eslint ."
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.32.0"
+  },
+  "dependencies": {
+    "sass": "^1.57.1"
+  }
 }
