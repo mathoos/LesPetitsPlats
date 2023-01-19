@@ -2,6 +2,9 @@
  //        AFFICHER LES CARDS DES RECETTES           //
 //////////////////////////////////////////////////////
 
+import recipes from "data/recipes"
+
+
 const recipesWrapper = document.querySelector('.recipes-container')
 let recipesChosenArray = recipes
 
