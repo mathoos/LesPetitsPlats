@@ -2,7 +2,7 @@
  //        AFFICHER LES CARDS DES RECETTES           //
 //////////////////////////////////////////////////////
 
-import recipes from "data/recipes"
+import {recipes} from "./recipes.js"
 
 
 const recipesWrapper = document.querySelector('.recipes-container')

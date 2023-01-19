@@ -1,9 +1,10 @@
-// eslint-disable-next-line no-undef
+
 module.exports = {
     "env": {
         "browser": true,
         "es2021": true
     },
+    "ignorePatterns" : [".eslintrc.js"],
     "extends": "eslint:recommended",
     "overrides": [
     ],
