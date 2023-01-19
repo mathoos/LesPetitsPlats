@@ -249,14 +249,6 @@ const barreChamp = document.querySelector(".search_bar")
 function filtreBarrePrincipale() {
     barreChamp.addEventListener("input", () => {
         rerollCards()       
-
-        const inputValue = barreChamp.value.trim()
-        if(inputValue.length >= 3){
-            recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
-            recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
-            recette.ingredients.some ((ingredient) => 
-            ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))                   
-        }
     })   
 }
 
@@ -274,49 +266,68 @@ const inputUstensiles = document.querySelector(".input-ustensiles");
 
 function filtreIngredients(){
     inputIngredients.addEventListener("input", () => {
-        
         const inputBarreIngredients = inputIngredients.value;
+        const searchTagIngredient = tabIngredients.filter((item) => {             
+            return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
+        })
+          
         if(inputBarreIngredients.length >= 1){      
             recipesChosenArray = recipesChosenArray.filter((recipe) =>                
                 recipe.ingredients.some(ingredient =>                      
                     ingredient.ingredient.toLowerCase().includes(inputBarreIngredients.toLowerCase())                       
                 )               
             ) 
-            const searchTagIngredient = tabIngredients.filter((item) => {             
-                return item.toLowerCase().includes(inputBarreIngredients.toLowerCase())           
-            }) 
-           
-            if(searchTagIngredient.length === 0){             
+
+            listeIngredients.innerHTML = ""          
+            createList(searchTagIngredient, listeIngredients)    
+             
+            if(searchTagIngredient.length === 0){            
                 let noTags = document.createElement("p")
                 noTags.classList.add("null")
                 noTags.innerHTML = "Aucun tag ne correspond à votre recherche."
                 listeIngredients.innerHTML = ""
                 listeIngredients.appendChild(noTags)              
-            }
-            else{
-                listeIngredients.innerHTML = ""          
-                createList(searchTagIngredient, listeIngredients)                                                       
-            }  
+            }          
+        } 
+
+        else{
+            listeIngredients.innerHTML = ""          
+            createList(tabIngredients, listeIngredients)
         }                   
     })   
 }
+
+
 
 function filtreAppareils(){  
     inputAppareils.addEventListener("input", () => {
         
         const inputBarreAppareils = inputAppareils.value;
+        const searchTagAppareil = tabAppareils.filter((item) => {
+            return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
+        }) 
+
         if (inputBarreAppareils.length >= 1) {
             recipesChosenArray = recipesChosenArray.filter((recipe) =>
                 recipe.appliance.toLowerCase().includes(inputBarreAppareils.toLowerCase())
             )
-
-            const searchTagAppareil = tabAppareils.filter((item) => {
-                return item.toLowerCase().includes(inputBarreAppareils.toLowerCase())           
-            }) 
-            
+           
             listeAppareils.innerHTML = ""            
-            createList(searchTagAppareil, listeAppareils)  
+            createList(searchTagAppareil, listeAppareils) 
+            
+            if(searchTagAppareil.length === 0){            
+                let noTags = document.createElement("p")
+                noTags.classList.add("null")
+                noTags.innerHTML = "Aucun tag ne correspond à votre recherche."
+                listeAppareils.innerHTML = ""
+                listeAppareils.appendChild(noTags)              
+            }    
         }
+
+        else{
+            listeAppareils.innerHTML = ""          
+            createList(tabAppareils, listeAppareils)
+        } 
     })
 }
 
@@ -324,20 +335,33 @@ function filtreUstensiles(){
     inputUstensiles.addEventListener("input", () => {
         
         const inputBarreUstensiles = inputUstensiles.value;
+        const searchTagUstensile = tabUstensiles.filter((item) => {
+            return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
+        }) 
+
         if (inputBarreUstensiles.length >= 1) {
             recipesChosenArray = recipesChosenArray.filter((recipe) =>
                 recipe.ustensils.some(item =>
                     item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())
                 )
             )
-
-            const searchTagUstensile = tabUstensiles.filter((item) => {
-                return item.toLowerCase().includes(inputBarreUstensiles.toLowerCase())           
-            }) 
-            
+   
             listeUstensiles.innerHTML = ""          
-            createList(searchTagUstensile, listeUstensiles)    
-        }  
+            createList(searchTagUstensile, listeUstensiles) 
+            
+            if(searchTagUstensile.length === 0){            
+                let noTags = document.createElement("p")
+                noTags.classList.add("null")
+                noTags.innerHTML = "Aucun tag ne correspond à votre recherche."
+                listeUstensiles.innerHTML = ""
+                listeUstensiles.appendChild(noTags)              
+            } 
+        }
+        
+        else{
+            listeUstensiles.innerHTML = ""          
+            createList(tabUstensiles, listeUstensiles)
+        } 
     })    
 }
 
@@ -350,7 +374,7 @@ function filtreUstensiles(){
 
 
 function rerollCards() {
-    let recipesChosenArray = recipes
+    recipesChosenArray = recipes
     const inputValue = barreChamp.value.trim()
 
     if(inputValue.length  >= 3){
@@ -362,8 +386,7 @@ function rerollCards() {
 
     if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
         displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray) 
-        noRecipes()    
+        initLists(recipesChosenArray)    
     } 
 
     else {      
@@ -399,6 +422,7 @@ function rerollCards() {
         displayRecipes(recipesChosenArray)
         initLists(recipesChosenArray)      
     }     
+    noRecipes() 
 }
 
 
