@@ -297,8 +297,6 @@ function filtreIngredients(){
     })   
 }
 
-
-
 function filtreAppareils(){  
     inputAppareils.addEventListener("input", () => {
         
