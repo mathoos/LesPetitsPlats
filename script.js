@@ -102,9 +102,11 @@ function initLists(recipes) {
 function createList(tags, container){
     Array.from(tags).sort().forEach((tag) => {
         const p = document.createElement("p");
+        p.classList.add("mot")
         p.innerHTML = tag;
         container.appendChild(p);
-    })      
+    })     
+    
 }
 
 
@@ -180,26 +182,24 @@ let tagsArrayIngredients = []
 let tagsArrayAppareils = []
 let tagsArrayUstensiles = []
 
-
-
 const liste = Array.from(document.querySelectorAll(".bouton_liste"))
 
 liste.forEach((i) => {
-    i.addEventListener("click", (e) => {         
+    i.addEventListener("click", (e) => {  
         const tag =  createTag(e) 
         const dataType = i.getAttribute("data-type")
         tag.setAttribute("data-type", `${dataType}`)
         tag.classList.add(dataType)
-
         if (dataType === "ingredients") {    
-            tagsArrayIngredients.push(tag.textContent.trim())                                              
+            tagsArrayIngredients.push(tag.textContent.trim())                                            
         }
         if (dataType === "appareils") {                          
             tagsArrayAppareils.push(tag.textContent.trim())           
         }
         if (dataType === "ustensiles") {               
             tagsArrayUstensiles.push(tag.textContent.trim())               
-        }   
+        }  
+
         closeTag()
         rerollCards()  
     })
@@ -237,7 +237,24 @@ function closeTag(){
     })
 }
 
-
+/*suppr()
+function suppr(){
+    let mots = document.querySelectorAll(".mot")
+    console.log
+    mots.forEach((mot) => {
+        mot.addEventListener("click", () => {
+            console.log("kikou")
+            let motValue = mot.textContent.trim()
+            console.log(motValue)
+            
+            let indexMot = tabIngredients.indexOf(mot)
+            console.log(indexMot)
+            if (indexMot > -1) {
+                tabIngredients.splice(indexMot, 1)
+            }
+        })
+    })
+}*/
 
 
   ///////////////////////////////////////////////////////
@@ -389,8 +406,7 @@ function rerollCards() {
 
     else {      
         if (tagsArrayIngredients.length !== 0) {
-            tagsArrayIngredients.forEach((tag) => {    
-                console.log(tagsArrayIngredients)           
+            tagsArrayIngredients.forEach((tag) => {              
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
                     recipe.ingredients.some(ingredient =>                      
                         ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())                       
