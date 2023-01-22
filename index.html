@@ -25,12 +25,12 @@
     <div class="section-tag" id="tag"></div>
 
 
-    <section class="menu_recherche">
+    <div class="menu_recherche">
 
         <div class="bouton">
             <div class="bouton_title ingredients" data-type="ingredients">         
                 <input class="input-ingredients" placeholder="Ingrédients">               
-                <i class="fas fa-chevron-down" ></i>
+                <i class="fas fa-chevron-down"></i>
             </div>
             <div class="bouton_liste ingredients" data-type="ingredients"></div>
         </div>
@@ -50,12 +50,13 @@
             </div>
             <div class="bouton_liste ustensiles" data-type="ustensiles"></div>
         </div>
-
-    </section>
+    </div>
 
 
     <div class="recipes-container"></div>  
-    <div class="no-recipes"></div>       
+    <div class="no-recipes">
+        <p>Aucune recette ne correspond à votre recherche.</p>
+    </div>       
         
     <script type="module" src="script.js"></script>
     
