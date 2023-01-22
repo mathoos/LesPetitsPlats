@@ -446,58 +446,6 @@ function rerollCards() {
     noRecipes() 
 }
 
-/*function rerollCards() {
-    recipesChosenArray = recipes
-    const inputValue = barreChamp.value.trim()
-
-    if(inputValue.length  >= 3){
-        recipesChosenArray = recipes.filter(recette => recette.name.toLowerCase().includes(inputValue.toLowerCase()) || 
-        recette.description.toLowerCase().includes(inputValue.toLowerCase()) || 
-        recette.ingredients.some ((ingredient) => 
-        ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))   
-    }
-
-    if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)    
-    } 
-
-    else {      
-        if (tagsArrayIngredients.length !== 0) {
-            tagsArrayIngredients.forEach((tag) => {              
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>                
-                    recipe.ingredients.some(ingredient =>                      
-                        ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())                       
-                    )                           
-                )
-            })     
-        }
-
-        if (tagsArrayAppareils.length !== 0) {
-            tagsArrayAppareils.forEach((tag) => {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.appliance.toLowerCase().includes(tag.toLowerCase())
-                )
-            })
-        }
-
-        if (tagsArrayUstensiles.length !== 0) {
-            tagsArrayUstensiles.forEach((tag) => {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.ustensils.some(item =>
-                        item.toLowerCase().includes(tag.toLowerCase())
-                    )
-                )
-            })
-        }
-
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)      
-    }     
-    noRecipes() 
-}
-
-*/
 
   ///////////////////////////////////////////////////////////
  //         MESSAGE SI RECETTES OU TAGS INVALIDES         //
