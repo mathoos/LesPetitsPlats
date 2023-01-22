@@ -102,7 +102,6 @@ function initLists(recipes) {
 function createList(tags, container){
     Array.from(tags).sort().forEach((tag) => {
         const p = document.createElement("p");
-        p.classList.add("mot")
         p.innerHTML = tag;
         container.appendChild(p);
     })     
@@ -237,24 +236,6 @@ function closeTag(){
     })
 }
 
-/*suppr()
-function suppr(){
-    let mots = document.querySelectorAll(".mot")
-    console.log
-    mots.forEach((mot) => {
-        mot.addEventListener("click", () => {
-            console.log("kikou")
-            let motValue = mot.textContent.trim()
-            console.log(motValue)
-            
-            let indexMot = tabIngredients.indexOf(mot)
-            console.log(indexMot)
-            if (indexMot > -1) {
-                tabIngredients.splice(indexMot, 1)
-            }
-        })
-    })
-}*/
 
 
   ///////////////////////////////////////////////////////
