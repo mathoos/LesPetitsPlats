@@ -69,12 +69,6 @@ body{
     gap : 2.6vw;
     padding : 5vh 0;
 
-    &--null{
-        width : 100%;
-        padding : 1vw;
-        background-color: rgba(231, 231, 231, 1);
-    }
-
     .recipes{
         min-height : 47vh;
         border-radius : 5px;
@@ -139,6 +133,12 @@ body{
     } 
 }
 
+.no-recipes{  
+    display : none;
+    width : 100%;
+    padding : 1vw;
+    background-color: rgba(231, 231, 231, 1);   
+}
 
 
 .section-tag{
@@ -260,6 +260,9 @@ body{
                 padding : 2vh 1vw;
                 width : calc(100%/3);
                 cursor : pointer;
+                &.null{
+                    width : 100%;
+                }
             }
 
             &.active{
