@@ -380,12 +380,11 @@ function rerollCards() {
         ingredient.ingredient.toLowerCase().includes(inputValue.toLowerCase())))   
     }
 
-    if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)    
-    } 
+    if (tagsArrayIngredients.length > 0 || tagsArrayAppareils.length > 0 || tagsArrayUstensiles.length > 0) {
+   
+    
 
-    else {      
+         
         if (tagsArrayIngredients.length !== 0) {
             tagsArrayIngredients.forEach((tag) => {              
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
@@ -414,9 +413,10 @@ function rerollCards() {
             })
         }
 
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)      
-    }     
+             
+    } 
+    displayRecipes(recipesChosenArray)
+        initLists(recipesChosenArray) 
     noRecipes() 
 }
 
