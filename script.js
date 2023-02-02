@@ -381,10 +381,7 @@ function rerollCards() {
     }
 
     if (tagsArrayIngredients.length > 0 || tagsArrayAppareils.length > 0 || tagsArrayUstensiles.length > 0) {
-   
-    
-
-         
+          
         if (tagsArrayIngredients.length !== 0) {
             tagsArrayIngredients.forEach((tag) => {              
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
@@ -411,12 +408,11 @@ function rerollCards() {
                     )
                 )
             })
-        }
-
-             
+        }             
     } 
+    
     displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray) 
+    initLists(recipesChosenArray) 
     noRecipes() 
 }
 
