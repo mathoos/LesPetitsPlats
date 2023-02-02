@@ -1,0 +1,248 @@
+* {
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+  text-decoration: none;
+}
+
+body {
+  padding: 0 5.2vw;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 3.8vh 0;
+}
+.header_logo {
+  width: 13.9vw;
+  height: 8.6vh;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 6.3vh;
+}
+.search_bar {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(231, 231, 231);
+  border-radius: 5px;
+  padding: 2vh 1.2vw;
+}
+.search_bar::-webkit-search-cancel-button {
+  display: none;
+}
+.search_icon {
+  position: absolute;
+  right: 0.8vw;
+  font-size: 1.8vw;
+}
+
+.recipes-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.6vw;
+  padding: 5vh 0;
+}
+.recipes-container .recipes {
+  min-height: 47vh;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.recipes-container .recipes_top {
+  width: 100%;
+  height: 45%;
+  background-color: rgb(199, 190, 190);
+}
+.recipes-container .recipes_bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  width: 100%;
+  height: 55%;
+  padding: 1vw;
+  background-color: rgb(231, 231, 231);
+  overflow: hidden;
+}
+.recipes-container .recipes_bottom-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.recipes-container .recipes_bottom-title h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.recipes-container .recipes_bottom-title--time {
+  display: flex;
+  gap: 0.5vw;
+}
+.recipes-container .recipes_bottom-title--time i {
+  font-size: 1vw;
+}
+.recipes-container .recipes_bottom-details {
+  display: flex;
+  gap: 1vw;
+}
+.recipes-container .recipes_bottom-details--txt {
+  width: 50%;
+}
+.recipes-container .recipes_bottom-details--txt.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.recipes-container .recipes_bottom-details--txt p {
+  font-size: 12px;
+}
+
+.no-recipes {
+  display: none;
+  width: 100%;
+  padding: 1vw;
+  background-color: rgb(231, 231, 231);
+}
+
+.section-tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vw;
+  padding: 3.8vh 0;
+}
+.section-tag .tag {
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+  padding: 0.8vh 1.1vw;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+}
+.section-tag .tag.ingredients {
+  background-color: #3282F7;
+}
+.section-tag .tag.appareils {
+  background-color: #68D9A4;
+}
+.section-tag .tag.ustensiles {
+  background-color: #ED6454;
+}
+
+.menu_recherche {
+  display: flex;
+  gap: 1vw;
+  padding: 3.8vh 0;
+}
+.menu_recherche .bouton {
+  position: relative;
+}
+.menu_recherche .bouton_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2vw;
+  min-width: 10vw;
+  padding: 2.7vh 0.9vw;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.menu_recherche .bouton_title.active {
+  width: 34.7vw;
+  border-radius: 5px 5px 0 0;
+}
+.menu_recherche .bouton_title.ingredients {
+  background-color: #3282F7;
+}
+.menu_recherche .bouton_title.appareils {
+  background-color: #68D9A4;
+}
+.menu_recherche .bouton_title.ustensiles {
+  background-color: #ED6454;
+}
+.menu_recherche .bouton_title input {
+  width: 100%;
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  outline: none;
+}
+.menu_recherche .bouton_title input::-moz-placeholder {
+  color: white;
+}
+.menu_recherche .bouton_title input:-ms-input-placeholder {
+  color: white;
+}
+.menu_recherche .bouton_title input::placeholder {
+  color: white;
+}
+.menu_recherche .bouton_title i {
+  cursor: pointer;
+  font-size: 1rem;
+  color: white;
+  transition: 0.5s ease;
+}
+.menu_recherche .bouton_title i.active {
+  transform: rotate(180deg);
+}
+.menu_recherche .bouton_liste {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  flex-wrap: wrap;
+  width: 34.7vw;
+  max-height: 50vh;
+  overflow-y: scroll;
+  border-radius: 0 0 5px 5px;
+}
+.menu_recherche .bouton_liste::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+.menu_recherche .bouton_liste::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.351);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.9px);
+  -webkit-backdrop-filter: blur(6.9px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+.menu_recherche .bouton_liste p {
+  color: white;
+  padding: 2vh 1vw;
+  width: 33.3333333333%;
+  cursor: pointer;
+}
+.menu_recherche .bouton_liste p.null {
+  width: 100%;
+}
+.menu_recherche .bouton_liste.active {
+  display: flex;
+}
+.menu_recherche .bouton_liste.ingredients {
+  background-color: #3282F7;
+}
+.menu_recherche .bouton_liste.appareils {
+  background-color: #68D9A4;
+}
+.menu_recherche .bouton_liste.ustensiles {
+  background-color: #ED6454;
+}/*# sourceMappingURL=style.css.map */

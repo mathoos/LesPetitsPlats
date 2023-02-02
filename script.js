@@ -161,49 +161,44 @@ function removeOpen(index1){
 
 var sectionTag = document.querySelector(".section-tag");
 
-function createTag(e){
-    const tag = document.createElement("div");
-	tag.className = "tag"
-
-    
-    tag.innerHTML = 
-    `
-        <span class="text">${e.target.textContent}</span>
-        <i class="far fa-times-circle close-tag" id="close_${e.target.textContent}"></i>
-    `
-    
-    sectionTag.appendChild(tag)
-
-    return tag
-}
-
 let tagsArrayIngredients = []
 let tagsArrayAppareils = []
 let tagsArrayUstensiles = []
 
-const liste = Array.from(document.querySelectorAll(".bouton_liste"))
 
-liste.forEach((i) => {
-    i.addEventListener("click", (e) => {  
-        const tag =  createTag(e) 
-        const dataType = i.getAttribute("data-type")
-        tag.setAttribute("data-type", `${dataType}`)
-        tag.classList.add(dataType)
-        if (dataType === "ingredients") {    
-            tagsArrayIngredients.push(tag.textContent.trim())                                            
-        }
-        if (dataType === "appareils") {                          
-            tagsArrayAppareils.push(tag.textContent.trim())           
-        }
-        if (dataType === "ustensiles") {               
-            tagsArrayUstensiles.push(tag.textContent.trim())               
-        }  
+function selectTag(){
 
-        closeTag()
-        rerollCards()  
+    const liste = Array.from(document.querySelectorAll(".bouton_liste"))
+
+    liste.forEach((i) => {
+        i.addEventListener("click", (e) => {  
+            const tag = document.createElement("div");
+            tag.className = "tag"        
+            tag.innerHTML = 
+            `
+                <span class="text">${e.target.textContent}</span>
+                <i class="far fa-times-circle close-tag" id="close_${e.target.textContent}"></i>
+            `           
+            sectionTag.appendChild(tag)
+
+            const dataType = i.getAttribute("data-type")
+            tag.setAttribute("data-type", `${dataType}`)
+            tag.classList.add(dataType)
+            if (dataType === "ingredients") {    
+                tagsArrayIngredients.push(tag.textContent.trim())                                            
+            }
+            if (dataType === "appareils") {                          
+                tagsArrayAppareils.push(tag.textContent.trim())           
+            }
+            if (dataType === "ustensiles") {               
+                tagsArrayUstensiles.push(tag.textContent.trim())               
+            }  
+    
+            closeTag()
+            rerollCards()  
+        })
     })
-})
-
+}
 
 
 
@@ -381,34 +376,28 @@ function rerollCards() {
     }
 
     if (tagsArrayIngredients.length > 0 || tagsArrayAppareils.length > 0 || tagsArrayUstensiles.length > 0) {
-          
-        if (tagsArrayIngredients.length !== 0) {
-            tagsArrayIngredients.forEach((tag) => {              
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>                
-                    recipe.ingredients.some(ingredient =>                      
-                        ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())                       
-                    )                           
-                )
-            })     
-        }
+        
+        tagsArrayIngredients.forEach((tag) => {              
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>                
+                recipe.ingredients.some(ingredient =>                      
+                    ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())                       
+                )                           
+            )
+        })     
+    
+        tagsArrayAppareils.forEach((tag) => {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.appliance.toLowerCase().includes(tag.toLowerCase())
+            )
+        })
 
-        if (tagsArrayAppareils.length !== 0) {
-            tagsArrayAppareils.forEach((tag) => {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.appliance.toLowerCase().includes(tag.toLowerCase())
+        tagsArrayUstensiles.forEach((tag) => {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.ustensils.some(item =>
+                    item.toLowerCase().includes(tag.toLowerCase())
                 )
-            })
-        }
-
-        if (tagsArrayUstensiles.length !== 0) {
-            tagsArrayUstensiles.forEach((tag) => {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.ustensils.some(item =>
-                        item.toLowerCase().includes(tag.toLowerCase())
-                    )
-                )
-            })
-        }             
+            )
+        })                 
     } 
     
     displayRecipes(recipesChosenArray)
@@ -444,6 +433,7 @@ function noRecipes(){
 function init(){
 	displayRecipes(recipes)	
 	initLists(recipes)
+    selectTag()
     filtreBarrePrincipale()
     filtreIngredients()
     filtreAppareils()
