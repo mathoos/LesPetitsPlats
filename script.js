@@ -406,13 +406,8 @@ function rerollCards() {
 
     
 
-    if (tagsArrayIngredients.length === 0 && tagsArrayAppareils.length === 0 && tagsArrayUstensiles.length === 0) {
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)
-    } 
-
-    else {    
-        if (tagsArrayIngredients.length !== 0) {
+    if (tagsArrayIngredients.length > 0 || tagsArrayAppareils.length > 0 || tagsArrayUstensiles.length > 0) {
+       
             tagsArrayIngredients.forEach((tag) => {               
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>                
                     recipe.ingredients.some(ingredient =>                      
@@ -420,17 +415,17 @@ function rerollCards() {
                     )               
                 )
             })
-        }
+        
 
-        if (tagsArrayAppareils.length !== 0) {
+   
             tagsArrayAppareils.forEach((tag) => {
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>
                     recipe.appliance.toLowerCase().includes(tag.toLowerCase())
                 )
             })
-        }
+        
 
-        if (tagsArrayUstensiles.length !== 0) {
+    
             tagsArrayUstensiles.forEach((tag) => {
                 recipesChosenArray = recipesChosenArray.filter((recipe) =>
                     recipe.ustensils.some(item =>
@@ -438,12 +433,15 @@ function rerollCards() {
                     )
                 )
             })
-        }
+        
+    } 
+
+        
+        
 
         displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)
-    }
-    noRecipes() 
+        initLists(recipesChosenArray)  
+        noRecipes() 
 }
 
 
