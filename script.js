@@ -401,47 +401,36 @@ function rerollCards() {
 
         recipesChosenArray = [...searchIngredient, ...searchName, ...searchDescription]
         recipesChosenArray = Array.from(new Set(recipesChosenArray))        
-    }
- 
-
-    
+    }  
 
     if (tagsArrayIngredients.length > 0 || tagsArrayAppareils.length > 0 || tagsArrayUstensiles.length > 0) {
        
-            tagsArrayIngredients.forEach((tag) => {               
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>                
-                    recipe.ingredients.some(ingredient =>                      
-                        ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())                       
-                    )               
-                )
-            })
-        
-
-   
-            tagsArrayAppareils.forEach((tag) => {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.appliance.toLowerCase().includes(tag.toLowerCase())
-                )
-            })
-        
-
+        tagsArrayIngredients.forEach((tag) => {               
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>                
+                recipe.ingredients.some(ingredient =>                      
+                    ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())                       
+                )               
+            )
+        })
     
-            tagsArrayUstensiles.forEach((tag) => {
-                recipesChosenArray = recipesChosenArray.filter((recipe) =>
-                    recipe.ustensils.some(item =>
-                        item.toLowerCase().includes(tag.toLowerCase())
-                    )
+        tagsArrayAppareils.forEach((tag) => {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.appliance.toLowerCase().includes(tag.toLowerCase())
+            )
+        })
+    
+        tagsArrayUstensiles.forEach((tag) => {
+            recipesChosenArray = recipesChosenArray.filter((recipe) =>
+                recipe.ustensils.some(item =>
+                    item.toLowerCase().includes(tag.toLowerCase())
                 )
-            })
-        
+            )
+        })     
     } 
 
-        
-        
-
-        displayRecipes(recipesChosenArray)
-        initLists(recipesChosenArray)  
-        noRecipes() 
+    displayRecipes(recipesChosenArray)
+    initLists(recipesChosenArray)  
+    noRecipes() 
 }
 
 
